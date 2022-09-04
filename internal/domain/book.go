@@ -18,10 +18,11 @@ type Book struct {
 }
 
 type BookResponse struct {
+	Id    	         uint       	  `gorm:"primaryKey;autoIncrement" json:"id"`
 	Title            string           `gorm:"not null" json:"title"`
 	Subtitle         string           `json:"subtitle"`
-	Author           AuthorResponse   `json:"author"`
-	Company          CompanyResponse  `json:"company"`
+	Author           Author           `json:"author"`
+	Company          Company          `json:"company"`
 	PublicationDate  time.Time  	  `json:"publication_date"`
 	CreatedAt        time.Time  	  `json:"created_at"`
 	UpdatedAt        time.Time  	  `json:"updated_at"`
