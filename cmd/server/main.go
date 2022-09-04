@@ -20,5 +20,12 @@ func main() {
 	router.POST("/authors", controllers.CreateAuthors)
 	router.DELETE("/authors/:id", controllers.DeleteAuthorById)
 
+	// companies
+	router.GET("/companies", controllers.FindAllCompanies)
+	router.GET("/companies/:id", controllers.FindCompanyById)
+	router.PUT("/companies/:id", controllers.UpdateCompanyById)
+	router.POST("/companies", controllers.CreateCompanies)
+	router.DELETE("/companies/:id", controllers.DeleteCompanyById)
+
 	router.Run("0.0.0.0:8080")
 }
