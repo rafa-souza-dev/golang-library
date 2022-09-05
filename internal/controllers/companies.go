@@ -1,9 +1,10 @@
 package controllers
 
 import (
+	"github.com/gin-gonic/gin"
+
 	"github.com/rafa-souza-dev/library/internal/domain"
 	"github.com/rafa-souza-dev/library/internal/database"
-	"github.com/gin-gonic/gin"
 )
 
 func CreateCompanies(c *gin.Context) {
