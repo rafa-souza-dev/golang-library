@@ -8,9 +8,9 @@ type Book struct {
 	Id    	         uint       `gorm:"primaryKey;autoIncrement" json:"id"`
 	Title            string     `gorm:"not null" json:"title"`
 	Subtitle         string     `json:"subtitle"`
-	AuthorId         uint       `gorm:"not null"`
+	AuthorId         uint       `gorm:"not null" json:"author_id"`
 	Author           Author     `json:"author"`
-	CompanyId        uint       `gorm:"not null"`
+	CompanyId        uint       `gorm:"not null" json:"company_id"`
 	Company          Company    `json:"company"`
 	PublicationDate  time.Time  `json:"publication_date"`
 	CreatedAt        time.Time  `json:"created_at"`
