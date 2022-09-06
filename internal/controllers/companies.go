@@ -10,7 +10,8 @@ import (
 func CreateCompanies(c *gin.Context) {
     var newCompany domain.Company
 
-    if err := c.BindJSON(&newCompany); err != nil {
+    if err := c.ShouldBindJSON(&newCompany); err != nil {
+		c.IndentedJSON(400, gin.H{"message": "invalid company data"})
         return
     }
 
@@ -28,11 +29,11 @@ func CreateCompanies(c *gin.Context) {
 
     result := database.DB_.Create(&company)
 	if result.Error != nil {
-		c.IndentedJSON(404, gin.H{"message": "invalid company data"})
+		c.IndentedJSON(400, gin.H{"message": "insert database error"})
 		return
 	}
 
-	c.IndentedJSON(201, newCompany)
+	c.IndentedJSON(201, company)
 }
 
 func FindAllCompanies(c *gin.Context) {
