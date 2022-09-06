@@ -27,5 +27,12 @@ func main() {
 	router.POST("/companies", controllers.CreateCompanies)
 	router.DELETE("/companies/:id", controllers.DeleteCompanyById)
 
+	// books
+	router.GET("/books", controllers.FindAllBooks)
+	router.GET("/books/:id", controllers.FindBookById)
+	router.PUT("/books/:id", controllers.UpdateBookById)
+	router.POST("/books", controllers.CreateBooks)
+	router.DELETE("/books/:id", controllers.DeleteBookById)
+
 	router.Run("0.0.0.0:8080")
 }
