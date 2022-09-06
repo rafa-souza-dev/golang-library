@@ -11,11 +11,12 @@ func CreateAuthors(c *gin.Context) {
     var newAuthor domain.Author
 
     if err := c.BindJSON(&newAuthor); err != nil {
+		c.IndentedJSON(400, gin.H{"message": "invalid author data"})
         return
     }
 
 	if newAuthor.Name == "" {
-		c.IndentedJSON(404, gin.H{"message": "name is required"})
+		c.IndentedJSON(400, gin.H{"message": "name is required"})
 		return
 	}
 	
@@ -27,11 +28,11 @@ func CreateAuthors(c *gin.Context) {
 
     result := database.DB_.Create(&author)
 	if result.Error != nil {
-		c.IndentedJSON(404, gin.H{"message": "invalid author data"})
+		c.IndentedJSON(400, gin.H{"message": "insert in database error"})
 		return
 	}
 
-	c.IndentedJSON(201, newAuthor)
+	c.IndentedJSON(201, author)
 }
 
 func FindAllAuthors(c *gin.Context) {
@@ -66,7 +67,7 @@ func UpdateAuthorById(c *gin.Context) {
 	result := database.DB_.First(&author, id)
 
 	if result.Error != nil {
-		c.IndentedJSON(404, gin.H{"message": "author not found"})
+		c.IndentedJSON(400, gin.H{"message": "author not found"})
 		return
 	}
 
@@ -77,7 +78,7 @@ func UpdateAuthorById(c *gin.Context) {
     }
 
 	if updatedAuthor.Name == "" {
-		c.IndentedJSON(404, gin.H{"message": "name is required"})
+		c.IndentedJSON(400, gin.H{"message": "name is required"})
 		return
 	}
 
@@ -85,7 +86,7 @@ func UpdateAuthorById(c *gin.Context) {
 
 	save := database.DB_.Save(&author)
 	if save.Error != nil {
-		c.IndentedJSON(404, gin.H{"message": "failed to edit author"})
+		c.IndentedJSON(400, gin.H{"message": "failed to edit author"})
 		return
 	}
 
