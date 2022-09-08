@@ -5,6 +5,7 @@ import (
 
 	"github.com/rafa-souza-dev/library/internal/controllers"
 	"github.com/rafa-souza-dev/library/internal/database"
+	"github.com/rafa-souza-dev/library/internal/middlewares"
 )
 
 func main() {
@@ -28,11 +29,15 @@ func main() {
 	router.DELETE("/companies/:id", controllers.DeleteCompanyById)
 
 	// books
-	router.GET("/books", controllers.FindAllBooks)
+	router.GET("/books", middlewares.Auth(), controllers.FindAllBooks)
 	router.GET("/books/:id", controllers.FindBookById)
 	router.PUT("/books/:id", controllers.UpdateBookById)
 	router.POST("/books", controllers.CreateBooks)
 	router.DELETE("/books/:id", controllers.DeleteBookById)
+
+	// users
+	router.POST("/users", controllers.CreateUser)
+	router.POST("/login", controllers.Login)
 
 	router.Run("0.0.0.0:8080")
 }
